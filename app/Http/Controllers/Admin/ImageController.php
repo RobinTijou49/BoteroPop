@@ -55,7 +55,7 @@ class ImageController extends Controller
 
     public function show(Image $image)
     {
-        $image->load(['tags', 'location', 'reservations']);
+        $image->load(['tags', 'location']);
 
         return view('admin.images.show', compact('image'));
     }

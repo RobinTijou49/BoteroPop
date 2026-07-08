@@ -20,7 +20,22 @@
       "PowerShell(gh *)",
       "Bash(git config *)",
       "Bash(git init *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(grep -iE \"\\\\.env$|\\\\.env\\\\.|secret|password|credential\")",
+      "Bash(git commit *)",
+      "Bash(git branch *)",
+      "Bash(git remote *)",
+      "Bash(git push *)",
+      "Bash(git credential-manager *)",
+      "Bash(git credential *)",
+      "Bash(git ls-remote *)",
+      "Bash(npm run *)",
+      "PowerShell(& \"C:\\\\Program Files \\(x86\\)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --headless=new --disable-gpu --window-size=1400,1000 --screenshot=\"C:\\\\Users\\\\Robin\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-Robin-Documents-BoteroPop\\\\d94ac398-3a55-44b0-b8e8-cc7e18e45765\\\\scratchpad\\\\shots\\\\login.png\" \"http://127.0.0.1:8000/login\")",
+      "Bash(node -e \"console.log\\(typeof WebSocket\\)\")",
+      "PowerShell(& \"C:\\\\Program Files \\(x86\\)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --headless=new --disable-gpu --window-size=1500,1100 --screenshot=\"C:\\\\Users\\\\Robin\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-Robin-Documents-BoteroPop\\\\d94ac398-3a55-44b0-b8e8-cc7e18e45765\\\\scratchpad\\\\shots\\\\dashboard.png\" \"C:\\\\Users\\\\Robin\\\\AppData\\\\Local\\\\Temp\\\\dashboard_preview.html\")",
+      "PowerShell(& \"C:\\\\Program Files \\(x86\\)\\\\Microsoft\\\\Edge\\\\Application\\\\msedge.exe\" --headless=new --disable-gpu --window-size=1500,1100 --screenshot=\"C:\\\\Users\\\\Robin\\\\AppData\\\\Local\\\\Temp\\\\claude\\\\C--Users-Robin-Documents-BoteroPop\\\\d94ac398-3a55-44b0-b8e8-cc7e18e45765\\\\scratchpad\\\\shots\\\\dashboard2.png\" \"C:\\\\Users\\\\Robin\\\\AppData\\\\Local\\\\Temp\\\\dashboard_preview.html\")",
+      "Bash(rm -f app/Http/Controllers/Admin/ReservationController.php app/Models/Reservation.php)",
+      "Bash(rm -rf resources/views/admin/reservations)"
     ]
   }
 }

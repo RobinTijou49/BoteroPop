@@ -46,7 +46,7 @@
         <div class="col-12 col-lg-8">
             <div class="card">
                 <div class="card-header bg-white fw-semibold">
-                    Inscrits <span class="badge text-bg-info">{{ $event->inscriptions_count }}</span>
+                    Inscrits <span class="badge bg-info-subtle text-info-emphasis">{{ $event->inscriptions_count }}</span>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover mb-0">

@@ -44,7 +44,7 @@
                             <td>{{ $event->lieu }}</td>
                             <td class="text-nowrap">{{ $event->date->format('d/m/Y') }}</td>
                             <td class="text-end">
-                                <span class="badge text-bg-info">{{ $event->inscriptions_count }}</span>
+                                <span class="badge bg-info-subtle text-info-emphasis">{{ $event->inscriptions_count }}</span>
                             </td>
                             <td class="text-end text-nowrap">
                                 <a href="{{ route('admin.evenements.show', $event) }}" class="btn btn-sm btn-outline-secondary" title="Consulter">

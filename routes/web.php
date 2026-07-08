@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\EventController;
 use App\Http\Controllers\Admin\ImageController;
 use App\Http\Controllers\Admin\InscriptionController;
-use App\Http\Controllers\Admin\ReservationController;
 use App\Http\Controllers\Admin\SettingsController;
 use App\Http\Controllers\Admin\TagController;
 use App\Http\Controllers\Admin\UserController;
@@ -35,14 +34,6 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     // Inscriptions (consultation et suppression uniquement)
     Route::resource('inscriptions', InscriptionController::class)
         ->only(['index', 'destroy']);
-
-    // Réservations d'œuvres
-    Route::get('reservations', [ReservationController::class, 'index'])
-        ->name('reservations.index');
-    Route::patch('reservations/{reservation}/statut', [ReservationController::class, 'updateStatus'])
-        ->name('reservations.update-status');
-    Route::delete('reservations/{reservation}', [ReservationController::class, 'destroy'])
-        ->name('reservations.destroy');
 
     // Tags
     Route::resource('tags', TagController::class)->except(['show']);

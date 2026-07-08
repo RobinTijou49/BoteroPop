@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
@@ -54,11 +53,6 @@ class Image extends Model
     public function tags(): BelongsToMany
     {
         return $this->belongsToMany(Tag::class, 'bp_image_tags', 'image_id', 'tag_id');
-    }
-
-    public function reservations(): HasMany
-    {
-        return $this->hasMany(Reservation::class, 'image_id');
     }
 
     /**

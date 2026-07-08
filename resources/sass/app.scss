@@ -1,28 +1,64 @@
 // BoteroPop — Back Office
+// ---------------------------------------------------------------------------
+// Identité visuelle : palette "galerie d'art" (terracotta sur charbon chaud),
+// pensée pour un contraste correct (AA) sur boutons, badges et sidebar.
+// ---------------------------------------------------------------------------
+$primary:    #a6472b;
+$secondary:  #6b6058;
+$success:    #3f7d5c;
+$info:       #3d7ba6;
+$warning:    #c1892f;
+$danger:     #b0362f;
+$light:      #f6f4f2;
+$dark:       #221d1a;
+
+$body-bg:    #f6f3f0;
+$body-color: #2a2521;
+
+$border-radius:        0.6rem;
+$border-radius-sm:     0.45rem;
+$border-radius-lg:      0.85rem;
+$box-shadow-sm: 0 1px 2px rgba(30, 20, 15, 0.05);
+$box-shadow:    0 2px 4px rgba(30, 20, 15, 0.045), 0 6px 16px rgba(30, 20, 15, 0.06);
+
+$link-color: $primary;
+$link-hover-color: darken($primary, 8%);
+
 @import "bootstrap-icons/font/bootstrap-icons.css";
 @import "bootstrap/scss/bootstrap";
 
 body {
-    background-color: #f4f6f9;
+    background-color: $body-bg;
 }
 
 // ---------------------------------------------------------------------------
-// Sidebar (inspirée d'AdminLTE / Tabler)
+// Sidebar
 // ---------------------------------------------------------------------------
+$sidebar-bg: #1c1815;
+
 .admin-sidebar {
-    width: 250px;
-    background-color: #1e2733;
+    width: 260px;
+    // !important nécessaire : Bootstrap force `background-color: transparent !important`
+    // sur .offcanvas-lg au-delà du breakpoint lg pour désactiver l'aspect panneau.
+    background-color: $sidebar-bg !important;
 
     .sidebar-brand {
         color: #fff;
         font-weight: 600;
         text-decoration: none;
+        letter-spacing: 0.01em;
+
+        i {
+            color: $primary;
+        }
     }
 
     .nav-link {
-        color: rgba(255, 255, 255, 0.72);
-        border-radius: 0.375rem;
+        color: rgba(255, 255, 255, 0.68);
+        border-radius: $border-radius-sm;
         padding: 0.55rem 0.85rem;
+        font-size: 0.925rem;
+        transition: background-color 0.15s ease, color 0.15s ease;
 
         i {
             width: 1.35rem;
@@ -31,20 +67,22 @@ body {
 
         &:hover {
             color: #fff;
-            background-color: rgba(255, 255, 255, 0.08);
+            background-color: rgba(255, 255, 255, 0.07);
         }
 
         &.active {
             color: #fff;
-            background-color: var(--bs-primary);
+            background-color: $primary;
+            box-shadow: 0 2px 8px rgba(166, 71, 43, 0.35);
         }
     }
 
     .sidebar-heading {
-        color: rgba(255, 255, 255, 0.4);
-        font-size: 0.72rem;
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 0.7rem;
+        font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.06em;
+        letter-spacing: 0.08em;
     }
 }
 
@@ -71,23 +109,48 @@ body {
 
 .stat-card {
     border: 0;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    box-shadow: $box-shadow-sm;
+    transition: box-shadow 0.15s ease, transform 0.15s ease;
+
+    &:hover {
+        box-shadow: $box-shadow;
+        transform: translateY(-1px);
+    }
 
     .stat-icon {
         width: 3rem;
         height: 3rem;
-        border-radius: 0.5rem;
+        border-radius: $border-radius;
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.4rem;
+        font-size: 1.3rem;
     }
 }
 
 .card {
     border: 0;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+    box-shadow: $box-shadow-sm;
+}
+
+.card-header {
+    border-bottom: 1px solid var(--bs-border-color);
+    font-size: 0.925rem;
+}
+
+.table {
+    font-size: 0.925rem;
+
+    thead {
+        th {
+            font-size: 0.72rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: $secondary;
+            border-bottom-width: 1px;
+        }
+    }
 }
 
 .table > :not(caption) > * > * {
@@ -98,7 +161,11 @@ body {
     width: 48px;
     height: 48px;
     object-fit: cover;
-    border-radius: 0.375rem;
+    border-radius: $border-radius-sm;
+}
+
+.btn {
+    font-weight: 500;
 }
 
 .toast-container {

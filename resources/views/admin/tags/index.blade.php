@@ -33,7 +33,7 @@
                         <tr>
                             <td class="fw-semibold">{{ $tag->nom }}</td>
                             <td class="text-end">
-                                <a href="{{ route('admin.oeuvres.index', ['tag' => $tag->id]) }}" class="badge text-bg-secondary text-decoration-none">
+                                <a href="{{ route('admin.oeuvres.index', ['tag' => $tag->id]) }}" class="badge bg-secondary-subtle text-secondary-emphasis text-decoration-none">
                                     {{ $tag->images_count }}
                                 </a>
                             </td>

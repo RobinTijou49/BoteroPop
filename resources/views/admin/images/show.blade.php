@@ -30,7 +30,7 @@
                     </div>
                     <div class="mt-2">
                         @foreach ($image->tags as $tag)
-                            <span class="badge text-bg-secondary">{{ $tag->nom }}</span>
+                            <span class="badge bg-secondary-subtle text-secondary-emphasis">{{ $tag->nom }}</span>
                         @endforeach
                     </div>
                 </div>
@@ -61,42 +61,6 @@
                         <dt class="col-sm-4">Shopify Variant ID</dt>
                         <dd class="col-sm-8 mb-0">{{ $image->shopify_variant_id ?: '—' }}</dd>
                     </dl>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header bg-white fw-semibold">
-                    Réservations <span class="badge text-bg-secondary">{{ $image->reservations->count() }}</span>
-                </div>
-                <div class="table-responsive">
-                    <table class="table table-hover mb-0">
-                        <thead class="table-light">
-                            <tr>
-                                <th>Client</th>
-                                <th>E-mail</th>
-                                <th>Statut</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @forelse ($image->reservations as $reservation)
-                                <tr>
-                                    <td>{{ $reservation->customer_name }}</td>
-                                    <td>{{ $reservation->email }}</td>
-                                    <td>
-                                        <span class="badge text-bg-{{ ['en_attente' => 'warning', 'confirmee' => 'success', 'annulee' => 'secondary'][$reservation->status] ?? 'secondary' }}">
-                                            {{ $reservation->statusLabel() }}
-                                        </span>
-                                    </td>
-                                    <td class="text-nowrap">{{ $reservation->reserved_at->format('d/m/Y H:i') }}</td>
-                                </tr>
-                            @empty
-                                <tr>
-                                    <td colspan="4" class="text-center text-muted py-4">Aucune réservation pour cette œuvre.</td>
-                                </tr>
-                            @endforelse
-                        </tbody>
-                    </table>
                 </div>
             </div>
         </div>

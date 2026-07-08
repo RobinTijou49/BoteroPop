@@ -41,12 +41,12 @@
                                 @endif
                             </td>
                             <td>{{ $utilisateur->email }}</td>
-                            <td><span class="badge text-bg-primary">{{ ucfirst($utilisateur->role) }}</span></td>
+                            <td><span class="badge bg-primary-subtle text-primary-emphasis">{{ ucfirst($utilisateur->role) }}</span></td>
                             <td>
                                 @if ($utilisateur->is_active)
-                                    <span class="badge text-bg-success">Actif</span>
+                                    <span class="badge bg-success-subtle text-success-emphasis">Actif</span>
                                 @else
-                                    <span class="badge text-bg-secondary">Désactivé</span>
+                                    <span class="badge bg-secondary-subtle text-secondary-emphasis">Désactivé</span>
                                 @endif
                             </td>
                             <td class="text-nowrap">{{ $utilisateur->created_at->format('d/m/Y') }}</td>

@@ -53,7 +53,7 @@
                             </td>
                             <td>
                                 @forelse ($image->tags as $tag)
-                                    <span class="badge text-bg-secondary">{{ $tag->nom }}</span>
+                                    <span class="badge bg-secondary-subtle text-secondary-emphasis">{{ $tag->nom }}</span>
                                 @empty
                                     <span class="text-muted">—</span>
                                 @endforelse

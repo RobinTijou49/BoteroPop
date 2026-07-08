@@ -5,7 +5,6 @@ namespace Database\Seeders;
 use App\Models\Event;
 use App\Models\Image;
 use App\Models\Inscription;
-use App\Models\Reservation;
 use App\Models\Tag;
 use Illuminate\Database\Seeder;
 
@@ -28,8 +27,6 @@ class DemoDataSeeder extends Seeder
             ->create()
             ->each(function (Image $image) use ($tags) {
                 $image->tags()->sync($tags->random(rand(1, 3))->pluck('id'));
-
-                Reservation::factory(rand(0, 2))->create(['image_id' => $image->id]);
             });
 
         Event::factory(6)

@@ -19,12 +19,6 @@
         </a>
     </li>
     <li class="nav-item">
-        <a href="{{ route('admin.reservations.index') }}"
-           class="nav-link {{ request()->routeIs('admin.reservations.*') ? 'active' : '' }}">
-            <i class="bi bi-bookmark-check"></i>Réservations
-        </a>
-    </li>
-    <li class="nav-item">
         <a href="{{ route('admin.evenements.index') }}"
            class="nav-link {{ request()->routeIs('admin.evenements.*') ? 'active' : '' }}">
             <i class="bi bi-calendar-event"></i>Évènements
