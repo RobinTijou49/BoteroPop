@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php -v)",
+      "Bash(composer -V)",
+      "Bash(composer create-project *)",
+      "Bash(composer require *)",
+      "Bash(php artisan *)",
+      "Bash(curl *)",
+      "Bash(echo \"EXIT:$?\")",
+      "Bash(powershell -Command \"Test-NetConnection -ComputerName 185.98.137.219 -Port 3306\")",
+      "Bash(whois 185.98.137.219)",
+      "Bash(ssh *)",
+      "Bash(where autossh *)",
+      "Bash(where ssh *)",
+      "PowerShell(Start-ScheduledTask *)",
+      "Bash(powershell -Command \"Test-NetConnection -ComputerName 127.0.0.1 -Port 3306\")",
+      "Bash(gh auth *)",
+      "Bash(gh --version)",
+      "PowerShell(gh *)",
+      "Bash(git config *)",
+      "Bash(git init *)",
+      "Bash(git add *)"
+    ]
+  }
+}
