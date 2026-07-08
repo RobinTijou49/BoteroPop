@@ -24,25 +24,14 @@
                     <div class="form-text">256 caractères maximum.</div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-6 mb-3">
-                        <label for="prix" class="form-label">Prix (€)</label>
-                        <input type="number" step="0.01" min="0" id="prix" name="prix"
-                               value="{{ old('prix', $image->prix) }}"
-                               class="form-control @error('prix') is-invalid @enderror">
-                        @error('prix')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <div class="col-md-6 mb-3">
-                        <label for="shopify_variant_id" class="form-label">Shopify Variant ID</label>
-                        <input type="text" id="shopify_variant_id" name="shopify_variant_id" maxlength="50"
-                               value="{{ old('shopify_variant_id', $image->shopify_variant_id) }}"
-                               class="form-control @error('shopify_variant_id') is-invalid @enderror">
-                        @error('shopify_variant_id')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
-                    </div>
+                <div class="mb-3">
+                    <label for="prix" class="form-label">Prix (€)</label>
+                    <input type="number" step="0.01" min="0" id="prix" name="prix"
+                           value="{{ old('prix', $image->prix) }}"
+                           class="form-control @error('prix') is-invalid @enderror">
+                    @error('prix')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
                 </div>
 
                 <div class="mb-3">

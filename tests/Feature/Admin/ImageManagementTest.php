@@ -39,7 +39,6 @@ class ImageManagementTest extends TestCase
             'prix' => '1250.50',
             'photo' => UploadedFile::fake()->image('oeuvre.jpg', 1200, 900),
             'adresse' => 'Tour Eiffel, Paris',
-            'shopify_variant_id' => '123456789',
             'tags' => $tags->pluck('id')->all(),
         ]);
 

@@ -20,7 +20,6 @@ class ImageFactory extends Factory
             'nom' => ucfirst(fake()->words(3, true)),
             'description' => fake()->text(200),
             'prix' => fake()->randomFloat(2, 50, 5000),
-            'shopify_variant_id' => fake()->boolean(50) ? (string) fake()->numberBetween(10000000, 99999999) : null,
         ];
     }
 }

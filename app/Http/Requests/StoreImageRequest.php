@@ -22,7 +22,6 @@ class StoreImageRequest extends FormRequest
             'prix' => ['nullable', 'numeric', 'min:0', 'max:99999999.99'],
             'photo' => ['required', 'image', 'mimes:jpg,jpeg,png,webp', 'max:10240'],
             'adresse' => ['nullable', 'string', 'max:255'],
-            'shopify_variant_id' => ['nullable', 'string', 'max:50'],
             'tags' => ['nullable', 'array'],
             'tags.*' => ['integer', 'exists:bp_tags,id'],
         ];
@@ -39,7 +38,6 @@ class StoreImageRequest extends FormRequest
             'prix' => 'prix',
             'photo' => 'photo',
             'adresse' => 'adresse',
-            'shopify_variant_id' => 'Shopify Variant ID',
             'tags' => 'tags',
         ];
     }

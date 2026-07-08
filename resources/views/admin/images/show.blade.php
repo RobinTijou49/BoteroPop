@@ -57,9 +57,6 @@
                                 —
                             @endif
                         </dd>
-
-                        <dt class="col-sm-4">Shopify Variant ID</dt>
-                        <dd class="col-sm-8 mb-0">{{ $image->shopify_variant_id ?: '—' }}</dd>
                     </dl>
                 </div>
             </div>

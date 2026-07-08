@@ -24,14 +24,13 @@ class Image extends Model
      * Colonnes hors blob : à utiliser dans les listes pour ne pas charger
      * toutes les photos en mémoire.
      */
-    public const COLUMNS_WITHOUT_BLOB = ['id', 'nom', 'description', 'prix', 'shopify_variant_id'];
+    public const COLUMNS_WITHOUT_BLOB = ['id', 'nom', 'description', 'prix'];
 
     protected $fillable = [
         'image',
         'nom',
         'description',
         'prix',
-        'shopify_variant_id',
     ];
 
     protected $hidden = [
