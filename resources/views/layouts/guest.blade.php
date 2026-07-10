@@ -9,15 +9,15 @@
 
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
     </head>
-    <body class="d-flex align-items-center py-4" style="min-height: 100vh; background-color: #1e2733;">
+    <body class="d-flex align-items-center py-4" style="min-height: 100vh; background-color: #000000;">
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-12 col-sm-8 col-md-6 col-lg-4">
                     <div class="text-center mb-4">
-                        <span class="fs-3 fw-bold text-white">
-                            <i class="bi bi-palette2 me-2"></i>BoteroPop
+                        <span class="d-inline-block bg-white rounded px-3 py-2">
+                            <img src="{{ asset('images/botero_logo.png') }}" alt="BoteroPop" style="max-width: 220px; width: 100%; height: auto;">
                         </span>
-                        <p class="text-white-50 mb-0">Back Office d'administration</p>
+                        <p class="text-white-50 mb-0 mt-2">Back Office d'administration</p>
                     </div>
 
                     <div class="card shadow-sm border-0">

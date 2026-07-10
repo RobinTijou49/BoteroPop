@@ -1,19 +1,19 @@
 // BoteroPop — Back Office
 // ---------------------------------------------------------------------------
-// Identité visuelle : palette "galerie d'art" (terracotta sur charbon chaud),
+// Identité visuelle : palette rouge / noir / blanc,
 // pensée pour un contraste correct (AA) sur boutons, badges et sidebar.
 // ---------------------------------------------------------------------------
-$primary:    #a6472b;
-$secondary:  #6b6058;
+$primary:    #c1121f;
+$secondary:  #4a4a4a;
 $success:    #3f7d5c;
-$info:       #3d7ba6;
+$info:       #4a4a4a;
 $warning:    #c1892f;
 $danger:     #b0362f;
-$light:      #f6f4f2;
-$dark:       #221d1a;
+$light:      #f8f8f8;
+$dark:       #121212;
 
-$body-bg:    #f6f3f0;
-$body-color: #2a2521;
+$body-bg:    #f5f5f5;
+$body-color: #1a1a1a;
 
 $border-radius:        0.6rem;
 $border-radius-sm:     0.45rem;
@@ -34,7 +34,7 @@ body {
 // ---------------------------------------------------------------------------
 // Sidebar
 // ---------------------------------------------------------------------------
-$sidebar-bg: #1c1815;
+$sidebar-bg: #000000;
 
 .admin-sidebar {
     width: 260px;
@@ -73,7 +73,7 @@ $sidebar-bg: #1c1815;
         &.active {
             color: #fff;
             background-color: $primary;
-            box-shadow: 0 2px 8px rgba(166, 71, 43, 0.35);
+            box-shadow: 0 2px 8px rgba(193, 18, 31, 0.35);
         }
     }
 

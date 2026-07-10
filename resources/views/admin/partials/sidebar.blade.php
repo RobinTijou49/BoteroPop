@@ -1,5 +1,7 @@
 <a href="{{ route('admin.dashboard') }}" class="sidebar-brand fs-5 d-none d-lg-flex align-items-center mb-3 px-2">
-    <i class="bi bi-palette2 me-2"></i>BoteroPop
+    <span class="d-inline-flex align-items-center bg-white rounded px-2 py-1">
+        <img src="{{ asset('images/botero_logo.png') }}" alt="BoteroPop" style="max-width: 100%; height: 32px;">
+    </span>
 </a>
 
 <ul class="nav nav-pills flex-column gap-1">

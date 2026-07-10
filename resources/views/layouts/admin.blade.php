@@ -14,7 +14,9 @@
         {{-- Sidebar (statique en desktop, offcanvas en mobile) --}}
         <aside class="offcanvas-lg offcanvas-start admin-sidebar p-3" tabindex="-1" id="sidebar" aria-label="Menu d'administration">
             <div class="offcanvas-header d-lg-none">
-                <span class="sidebar-brand fs-5"><i class="bi bi-palette2 me-2"></i>BoteroPop</span>
+                <span class="sidebar-brand fs-5 d-inline-flex align-items-center bg-white rounded px-2 py-1">
+                    <img src="{{ asset('images/botero_logo.png') }}" alt="BoteroPop" height="24">
+                </span>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" data-bs-target="#sidebar" aria-label="Fermer"></button>
             </div>
             <div class="offcanvas-body d-flex flex-column p-0 h-100">
