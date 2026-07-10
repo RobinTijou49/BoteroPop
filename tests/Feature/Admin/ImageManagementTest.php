@@ -176,4 +176,189 @@ class ImageManagementTest extends TestCase
         $response->assertSee('Girafe multicolore');
         $response->assertDontSee('Nature morte');
     }
+
+    public function test_creating_a_priced_image_creates_a_woocommerce_product(): void
+    {
+        config([
+            'services.woocommerce.url' => 'https://boutique.example.com',
+            'services.woocommerce.consumer_key' => 'ck_test',
+            'services.woocommerce.consumer_secret' => 'cs_test',
+        ]);
+
+        Http::fake([
+            'boutique.example.com/wp-json/wp/v2/media' => Http::response(['id' => 55, 'source_url' => 'https://boutique.example.com/media/1.jpg'], 201),
+            'boutique.example.com/wp-json/wc/v3/products' => Http::response(['id' => 987, 'sku' => 'OEUVRE-987'], 201),
+        ]);
+
+        $this->actingAs($this->admin)->post('/admin/oeuvres', [
+            'nom' => 'Toile tarifée',
+            'description' => 'Œuvre à vendre.',
+            'prix' => '499.00',
+            'photo' => UploadedFile::fake()->image('oeuvre.jpg'),
+        ]);
+
+        $image = Image::firstWhere('nom', 'Toile tarifée');
+
+        $this->assertNotNull($image);
+        $this->assertSame(987, $image->woocommerce_product_id);
+        $this->assertSame('OEUVRE-987', $image->woocommerce_sku);
+
+        Http::assertSent(function ($request) {
+            return $request->url() === 'https://boutique.example.com/wp-json/wc/v3/products'
+                && $request['name'] === 'Toile tarifée'
+                && $request['regular_price'] === '499.00'
+                && $request['manage_stock'] === true
+                && $request['stock_quantity'] === 1;
+        });
+    }
+
+    public function test_creating_an_image_without_a_price_does_not_call_woocommerce(): void
+    {
+        config([
+            'services.woocommerce.url' => 'https://boutique.example.com',
+            'services.woocommerce.consumer_key' => 'ck_test',
+            'services.woocommerce.consumer_secret' => 'cs_test',
+        ]);
+
+        Http::fake();
+
+        $this->actingAs($this->admin)->post('/admin/oeuvres', [
+            'nom' => 'Toile sans prix',
+            'description' => 'Œuvre non tarifée.',
+            'photo' => UploadedFile::fake()->image('oeuvre.jpg'),
+        ]);
+
+        $image = Image::firstWhere('nom', 'Toile sans prix');
+
+        $this->assertNotNull($image);
+        $this->assertNull($image->woocommerce_product_id);
+        Http::assertNothingSent();
+    }
+
+    public function test_image_creation_survives_a_woocommerce_failure(): void
+    {
+        config([
+            'services.woocommerce.url' => 'https://boutique.example.com',
+            'services.woocommerce.consumer_key' => 'ck_test',
+            'services.woocommerce.consumer_secret' => 'cs_test',
+        ]);
+
+        Http::fake([
+            'boutique.example.com/*' => Http::response([], 500),
+        ]);
+
+        $response = $this->actingAs($this->admin)->post('/admin/oeuvres', [
+            'nom' => 'Toile malgré la panne',
+            'description' => 'WooCommerce est en panne.',
+            'prix' => '150.00',
+            'photo' => UploadedFile::fake()->image('oeuvre.jpg'),
+        ]);
+
+        $image = Image::firstWhere('nom', 'Toile malgré la panne');
+
+        $response->assertRedirect(route('admin.oeuvres.show', $image, absolute: false));
+        $this->assertNotNull($image);
+        $this->assertNull($image->woocommerce_product_id);
+    }
+
+    public function test_updating_a_linked_product_pushes_the_new_price_to_woocommerce(): void
+    {
+        config([
+            'services.woocommerce.url' => 'https://boutique.example.com',
+            'services.woocommerce.consumer_key' => 'ck_test',
+            'services.woocommerce.consumer_secret' => 'cs_test',
+        ]);
+
+        $image = Image::factory()->create(['prix' => 100, 'woocommerce_product_id' => 987, 'woocommerce_sku' => 'OEUVRE-987']);
+
+        Http::fake([
+            'boutique.example.com/wp-json/wc/v3/products/987' => Http::response(['id' => 987], 200),
+        ]);
+
+        $this->actingAs($this->admin)->put("/admin/oeuvres/{$image->id}", [
+            'nom' => $image->nom,
+            'description' => $image->description,
+            'prix' => '650.00',
+        ])->assertSessionHasNoErrors();
+
+        Http::assertSent(function ($request) {
+            return $request->url() === 'https://boutique.example.com/wp-json/wc/v3/products/987'
+                && $request->method() === 'PUT'
+                && $request['regular_price'] === '650.00';
+        });
+
+        // Aucune nouvelle photo envoyée : la médiathèque WordPress n'est pas sollicitée.
+        Http::assertNotSent(fn ($request) => str_contains($request->url(), '/wp-json/wp/v2/media'));
+    }
+
+    public function test_updating_an_unpriced_image_creates_the_missing_product(): void
+    {
+        config([
+            'services.woocommerce.url' => 'https://boutique.example.com',
+            'services.woocommerce.consumer_key' => 'ck_test',
+            'services.woocommerce.consumer_secret' => 'cs_test',
+        ]);
+
+        $image = Image::factory()->create(['prix' => null, 'woocommerce_product_id' => null]);
+
+        Http::fake([
+            'boutique.example.com/wp-json/wp/v2/media' => Http::response(['id' => 55], 201),
+            'boutique.example.com/wp-json/wc/v3/products' => Http::response(['id' => 321, 'sku' => 'OEUVRE-321'], 201),
+        ]);
+
+        $this->actingAs($this->admin)->put("/admin/oeuvres/{$image->id}", [
+            'nom' => $image->nom,
+            'description' => $image->description,
+            'prix' => '75.00',
+        ])->assertSessionHasNoErrors();
+
+        $image->refresh();
+
+        $this->assertSame(321, $image->woocommerce_product_id);
+        $this->assertSame('OEUVRE-321', $image->woocommerce_sku);
+    }
+
+    public function test_deleting_an_image_deletes_its_woocommerce_product(): void
+    {
+        config([
+            'services.woocommerce.url' => 'https://boutique.example.com',
+            'services.woocommerce.consumer_key' => 'ck_test',
+            'services.woocommerce.consumer_secret' => 'cs_test',
+        ]);
+
+        $image = Image::factory()->create(['prix' => 100, 'woocommerce_product_id' => 987]);
+
+        Http::fake([
+            'boutique.example.com/wp-json/wc/v3/products/987' => Http::response(['id' => 987], 200),
+        ]);
+
+        $this->actingAs($this->admin)
+            ->delete("/admin/oeuvres/{$image->id}")
+            ->assertRedirect(route('admin.oeuvres.index', absolute: false));
+
+        $this->assertDatabaseMissing('bp_image', ['id' => $image->id]);
+
+        Http::assertSent(function ($request) {
+            return $request->url() === 'https://boutique.example.com/wp-json/wc/v3/products/987'
+                && $request->method() === 'DELETE'
+                && $request['force'] === true;
+        });
+    }
+
+    public function test_deleting_an_image_without_a_product_does_not_call_woocommerce(): void
+    {
+        config([
+            'services.woocommerce.url' => 'https://boutique.example.com',
+            'services.woocommerce.consumer_key' => 'ck_test',
+            'services.woocommerce.consumer_secret' => 'cs_test',
+        ]);
+
+        $image = Image::factory()->create(['woocommerce_product_id' => null]);
+
+        Http::fake();
+
+        $this->actingAs($this->admin)->delete("/admin/oeuvres/{$image->id}");
+
+        Http::assertNothingSent();
+    }
 }

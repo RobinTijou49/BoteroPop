@@ -24,13 +24,15 @@ class Image extends Model
      * Colonnes hors blob : à utiliser dans les listes pour ne pas charger
      * toutes les photos en mémoire.
      */
-    public const COLUMNS_WITHOUT_BLOB = ['id', 'nom', 'description', 'prix'];
+    public const COLUMNS_WITHOUT_BLOB = ['id', 'nom', 'description', 'prix', 'woocommerce_product_id'];
 
     protected $fillable = [
         'image',
         'nom',
         'description',
         'prix',
+        'woocommerce_product_id',
+        'woocommerce_sku',
     ];
 
     protected $hidden = [

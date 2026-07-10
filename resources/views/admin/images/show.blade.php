@@ -45,6 +45,20 @@
                         <dt class="col-sm-4">Description</dt>
                         <dd class="col-sm-8">{{ $image->description }}</dd>
 
+                        <dt class="col-sm-4">Produit WooCommerce</dt>
+                        <dd class="col-sm-8">
+                            @if ($image->woocommerce_product_id)
+                                <i class="bi bi-bag-check text-success me-1"></i>Produit #{{ $image->woocommerce_product_id }}
+                                @if ($image->woocommerce_sku)
+                                    <span class="text-secondary">(SKU {{ $image->woocommerce_sku }})</span>
+                                @endif
+                            @elseif ($image->prix)
+                                <i class="bi bi-exclamation-triangle text-warning me-1"></i>Non créé
+                            @else
+                                —
+                            @endif
+                        </dd>
+
                         <dt class="col-sm-4">Coordonnées GPS</dt>
                         <dd class="col-sm-8">
                             @if ($image->location)

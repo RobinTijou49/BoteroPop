@@ -29,6 +29,11 @@
         <env name="MAIL_MAILER" value="array"/>
         <env name="QUEUE_CONNECTION" value="sync"/>
         <env name="SESSION_DRIVER" value="array"/>
+        <env name="WOOCOMMERCE_URL" value=""/>
+        <env name="WOOCOMMERCE_CONSUMER_KEY" value=""/>
+        <env name="WOOCOMMERCE_CONSUMER_SECRET" value=""/>
+        <env name="WOOCOMMERCE_WP_USERNAME" value=""/>
+        <env name="WOOCOMMERCE_WP_APP_PASSWORD" value=""/>
         <env name="PULSE_ENABLED" value="false"/>
         <env name="TELESCOPE_ENABLED" value="false"/>
         <env name="NIGHTWATCH_ENABLED" value="false"/>

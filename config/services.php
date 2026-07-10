@@ -40,4 +40,15 @@ return [
         'user_agent' => env('NOMINATIM_USER_AGENT', 'BoteroPop-BackOffice/1.0 (admin@monsite.fr)'),
     ],
 
+    'woocommerce' => [
+        // URL du site WordPress/WooCommerce (même base de données que ce back office).
+        'url' => env('WOOCOMMERCE_URL'),
+        'consumer_key' => env('WOOCOMMERCE_CONSUMER_KEY'),
+        'consumer_secret' => env('WOOCOMMERCE_CONSUMER_SECRET'),
+        // Identifiants WordPress (mot de passe d'application) utilisés uniquement
+        // pour envoyer la photo dans la médiathèque via l'API REST wp/v2/media.
+        'wp_username' => env('WOOCOMMERCE_WP_USERNAME'),
+        'wp_app_password' => env('WOOCOMMERCE_WP_APP_PASSWORD'),
+    ],
+
 ];
